@@ -1,12 +1,3 @@
-provider "github" {
-  alias = "pallavi895"
-  owner = "pallavi895"
-  app_auth {
-    id              = "885017"
-    pem_file        = var.github_app_pem
-    installation_id = "50052583"
-  }
-}
 
 
 resource "tls_private_key" "root_ca_key" {
@@ -36,24 +27,20 @@ resource "tls_self_signed_cert" "root_ca" {
   ]
 }
 
-
-/*data "github_repository" "main" {
-  full_name = "mcdevops-org/terraform-aws-module-eks"
-}*/
-
-
-
-data "github_actions_public_key" "repo_public_key" {
-  repository = "terraform-aws-module-eks"
-  provider   = github.mcdevops-org
+resource "github_actions_variable" "example_variable" {
+  repository       =  = "terraform-aws-module-eks"
+  variable_name    == var.rt_ca_key
+  value            = tls_private_key.root_ca_key.private_key_pem
 }
 
 
+
+
 # Store Root CA Private Key as a Secret in GitHub Actions
-resource "github_actions_secret" "root_ca_private_key" {
+/*resource "github_actions_secret" "root_ca_private_key" {
   repository       = "terraform-aws-module-eks"
   secret_name      = var.rt_ca_key
   plaintext_value  = tls_private_key.root_ca_key.private_key_pem
   provider   = github.mcdevops-org
-}
+}*/
 
