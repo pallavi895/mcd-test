@@ -1,6 +1,6 @@
 provider "github" {
-  alias = "mcdevops-org"
-  owner = "mcdevops-org"
+  alias = "pallavi895"
+  owner = "pallavi895"
   app_auth {
     id              = "885017"
     pem_file        = var.github_app_pem
