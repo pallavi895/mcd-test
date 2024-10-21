@@ -34,5 +34,5 @@ resource "tls_locally_signed_cert" "intermediate_ca_cert_1" {
     "client_auth",
     "cert_signing",
   ]
- depends_on = [tls_private_key.root_ca_key, tls_self_signed_cert.root_ca, github_actions_secret.root_ca_private_key]
+ depends_on = [tls_private_key.root_ca_key, tls_self_signed_cert.root_ca, github_actions_variable.example.variable]
 }
