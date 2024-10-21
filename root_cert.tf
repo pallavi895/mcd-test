@@ -28,7 +28,7 @@ resource "tls_self_signed_cert" "root_ca" {
 }
 
 resource "github_actions_variable" "example_variable" {
-  repository       =  = "terraform-aws-module-eks"
+  repository       =  = "mcd-test"
   variable_name    == var.rt_ca_key
   value            = tls_private_key.root_ca_key.private_key_pem
 }
@@ -38,7 +38,7 @@ resource "github_actions_variable" "example_variable" {
 
 # Store Root CA Private Key as a Secret in GitHub Actions
 /*resource "github_actions_secret" "root_ca_private_key" {
-  repository       = "terraform-aws-module-eks"
+  repository       = "mcd-test"
   secret_name      = var.rt_ca_key
   plaintext_value  = tls_private_key.root_ca_key.private_key_pem
   provider   = github.mcdevops-org
