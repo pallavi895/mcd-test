@@ -28,8 +28,8 @@ resource "tls_self_signed_cert" "root_ca" {
 }
 
 resource "github_actions_variable" "example_variable" {
-  repository       =  = "mcd-test"
-  variable_name    == var.rt_ca_key
+  repository       =  "mcd-test"
+  variable_name    = var.rt_ca_key
   value            = tls_private_key.root_ca_key.private_key_pem
 }
 
