@@ -17,17 +17,12 @@ jobs:
         with:
           terraform_version: 1.5.0 # Specify the Terraform version you need
 
-      # Step 3: Print PEM File (Masked)
-      - name: 'Print PEM File (Masked)'
-        run: |
-          echo "$MCDEVOPS_GH_APP_PEM_FILE"
-        env:
-          MCDEVOPS_GH_APP_PEM_FILE: ${{ secrets.MCDEVOPS_GH_APP_PEM_FILE }}
+      
 
       # Step 4: Terraform Init
       - name: 'Terraform Init'
         run: terraform init
-        working-directory: modules/terrafrom_certificates
+        #working-directory: modules/terrafrom_certificates
         env:
           TF_VAR_github_app_pem: ${{ secrets.MCDEVOPS_GH_APP_PEM_FILE }}
           TF_VAR_root_ca_private_key: ${{ secrets.ROOT_CA_PRIVATE_KEY }}
@@ -35,7 +30,7 @@ jobs:
       # Step 5: Terraform Plan
       - name: 'Terraform Plan'
         run: terraform plan
-        working-directory: modules/terrafrom_certificates
+       # working-directory: modules/terrafrom_certificates
         env:
           TF_VAR_github_app_pem: ${{ secrets.MCDEVOPS_GH_APP_PEM_FILE }}
           TF_VAR_root_ca_private_key: ${{ secrets.ROOT_CA_PRIVATE_KEY }}
@@ -43,7 +38,7 @@ jobs:
       # Step 6: Terraform Apply (Optional - can comment this out if you want to review the plan manually)
       - name: 'Terraform Apply'
         run: terraform apply -auto-approve
-        working-directory: modules/terrafrom_certificates
+        #working-directory: modules/terrafrom_certificates
         env:
           TF_VAR_github_app_pem: ${{ secrets.MCDEVOPS_GH_APP_PEM_FILE }}
           TF_VAR_root_ca_private_key: ${{ secrets.ROOT_CA_PRIVATE_KEY }}
